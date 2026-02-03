@@ -35,6 +35,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [id, setId] = useState<number | null>(null);
   const [accessToken, setAccessToken] = useState<string | null>(null);
   const [authLoading, setAuthLoading] = useState(true);
+  const apiUrl = import.meta.env.VITE_API_URL;
+
   const login = (token: string) => {
     const decoded = jwtDecode<JwtPayload>(token);
 
@@ -45,7 +47,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const refresh = async () => {
     try {
       const res = await axios.post(
-        "http://localhost:8080/refresh",
+        `${apiUrl}refresh"`,
         {},
         {
           withCredentials: true,
@@ -75,7 +77,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const logout = async () => {
     try {
-      await axios.post("http://localhost:8080/logout");
+      await axios.post(`${apiUrl}logout`);
     } finally {
       setAccessToken(null);
       setId(null);

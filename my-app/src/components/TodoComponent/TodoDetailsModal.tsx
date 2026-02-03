@@ -47,7 +47,7 @@ export default function TodoDetailsModal({
   const [content, setContent] = useState("");
   const [status, setStatus] = useState<Status>("PENDING");
   const [saving, setSaving] = useState(false);
-
+  const apiUrl = import.meta.env.VITE_API_URL;
   // reset form on open / todo change
   useEffect(() => {
     if (!show || !todo) return;
@@ -107,7 +107,7 @@ export default function TodoDetailsModal({
     try {
       setSaving(true);
 
-      await axios.put(`http://localhost:8080/api/user/todo/${todo.id}`, {
+      await axios.put(`${apiUrl}api/user/todo/${todo.id}`, {
         title: trimmedTitle,
         content: trimmedContent,
         status,

@@ -12,12 +12,13 @@ function Register({ onSwitch }: RegisterProps) {
   const [password, setPassword] = useState("");
   const [confirmPass, setConfirmPassword] = useState("");
   const [isMatch, setIsMatch] = useState<boolean>();
+  const apiUrl = import.meta.env.VITE_API_URL;
 
   const handleRegister = async (e: React.SubmitEvent) => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:8080/register",
+        `${apiUrl}register`,
         {
           username,
           email,

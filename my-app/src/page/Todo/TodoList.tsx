@@ -32,8 +32,9 @@ export default function TodoNotes() {
     return c;
   }, [todos]);
   const fetchTodos = async () => {
+    const apiUrl = import.meta.env.VITE_API_URL;
     try {
-      const response = await axios.get("http://localhost:8080/api/user/todo");
+      const response = await axios.get(`${apiUrl}api/user/todo`);
       const data = response.data;
       setTodos(Array.isArray(data) ? data : (data.content ?? []));
     } catch (err) {

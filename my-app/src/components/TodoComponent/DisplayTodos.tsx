@@ -24,12 +24,11 @@ function safeDate(value?: string | null) {
 }
 
 function DisplayTodos({ todos, setTodos, onOpen }: DisplayTodosProps) {
+  const apiUrl = import.meta.env.VITE_API_URL;
   const removeTodo = async (id: number) => {
     try {
       setTodos((prev) => prev.filter((t) => t.id !== id));
-      const response = await axios.delete(
-        `http://localhost:8080/api/user/todo/${id}`,
-      );
+      const response = await axios.delete(`${apiUrl}api/user/todo/${id}`);
       toast.success("Deleted", {
         position: "bottom-right",
         autoClose: 1000,

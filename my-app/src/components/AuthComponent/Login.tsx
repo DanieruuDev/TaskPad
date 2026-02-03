@@ -15,6 +15,7 @@ function Login({ onSwitch }: LoginProps) {
   const [password, setPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const apiUrl = import.meta.env.VITE_API_URL;
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -34,7 +35,7 @@ function Login({ onSwitch }: LoginProps) {
       setLoading(true);
 
       const res = await axios.post(
-        "http://localhost:8080/login",
+        `${apiUrl}login`,
         { username, password },
         { withCredentials: true },
       );
@@ -59,11 +60,11 @@ function Login({ onSwitch }: LoginProps) {
   };
 
   const loginWithGoogle = () => {
-    window.location.href = "http://localhost:8080/oauth2/authorization/google";
+    window.location.href = `${apiUrl}oauth2/authorization/google`;
   };
 
   const loginWithGithub = () => {
-    window.location.href = "http://localhost:8080/oauth2/authorization/github";
+    window.location.href = `${apiUrl}auth2/authorization/github`;
   };
 
   return (

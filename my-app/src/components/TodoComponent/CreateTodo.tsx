@@ -25,6 +25,8 @@ function CreateTodo({
   setTodos,
   fetchTodos,
 }: createTodoProps) {
+  const apiUrl = import.meta.env.VITE_API_URL;
+
   const addTodo = async () => {
     if (!canAdd) return;
 
@@ -41,7 +43,7 @@ function CreateTodo({
     ]);
 
     try {
-      const response = await axios.post("http://localhost:8080/api/user/todo", {
+      const response = await axios.post(`${apiUrl}api/user/todo`, {
         title,
         content,
         status,
