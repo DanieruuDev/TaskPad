@@ -62,20 +62,17 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     }
   };
   useEffect(() => {
+    // attach token on every request
     const reqId = axios.interceptors.request.use((config) => {
-      config.headers = config.headers ?? {};
-
       if (accessToken) {
         config.headers.Authorization = `Bearer ${accessToken}`;
       }
-
-      // since you're using refresh cookies cross-site, always allow cookies too
-      config.withCredentials = true;
-
       return config;
     });
 
-    return () => axios.interceptors.request.eject(reqId);
+    return () => {
+      axios.interceptors.request.eject(reqId);
+    };
   }, [accessToken]);
 
   const logout = async () => {
