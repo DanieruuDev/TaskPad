@@ -24,7 +24,7 @@ export default function TodoNotes() {
   const [selectedTodo, setSelectedTodo] = useState<Todo | null>(null);
   const [showModal, setShowModal] = useState(false);
   const canAdd = title.trim().length > 0 && content.trim().length > 0;
-  const { authLoading, isAuthenticated } = useAuth();
+  const { authLoading, accessToken } = useAuth();
   const counts = useMemo(() => {
     const c = { PENDING: 0, ON_GOING: 0, COMPLETED: 0 };
     for (const t of todos) c[t.status]++;
@@ -35,6 +35,7 @@ export default function TodoNotes() {
     try {
       const response = await axios.get(`${apiUrl}api/user/todo`, {
         withCredentials: true,
+        headers: accessToken ? { Authorization: `Bearer ${accessToken}` } : {},
       });
       const data = response.data;
       console.log("data", data);
@@ -56,10 +57,10 @@ export default function TodoNotes() {
 
   useEffect(() => {
     if (authLoading) return; // wait for refresh() to finish
-    if (!isAuthenticated) return; // no token => don't fetch
+    if (!accessToken) return; // no token => don't fetch
     // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchTodos();
-  }, [authLoading, isAuthenticated]);
+  }, [authLoading, accessToken]);
 
   return (
     <>
