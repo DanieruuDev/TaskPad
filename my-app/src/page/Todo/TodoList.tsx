@@ -58,8 +58,9 @@ export default function TodoNotes() {
   useEffect(() => {
     if (authLoading) return; // wait for refresh() to finish
     if (!accessToken) return; // no token => don't fetch
-    // eslint-disable-next-line react-hooks/set-state-in-effect
+
     fetchTodos();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [authLoading, accessToken]);
 
   return (

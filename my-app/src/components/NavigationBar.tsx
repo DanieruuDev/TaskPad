@@ -22,9 +22,9 @@ function NavigationBar() {
                 className="rounded-circle bg-dark text-white d-flex align-items-center justify-content-center"
                 style={{ width: 32, height: 32, fontSize: 13 }}
               >
-                DP
+                N/A
               </div>
-              <span className="d-none d-md-inline">Daniel</span>
+              <span className="d-none d-md-inline">You</span>
             </button>
 
             <ul className="dropdown-menu dropdown-menu-end">
