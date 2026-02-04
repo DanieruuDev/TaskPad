@@ -37,6 +37,7 @@ export default function TodoNotes() {
     try {
       const response = await axios.get(`${apiUrl}api/user/todo`);
       const data = response.data;
+      console.log("data", data);
       setTodos(Array.isArray(data) ? data : (data.content ?? []));
     } catch (err) {
       console.error(err);
