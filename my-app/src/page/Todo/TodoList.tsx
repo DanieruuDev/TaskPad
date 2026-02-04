@@ -4,6 +4,7 @@ import NavigationBar from "../../components/NavigationBar";
 import DisplayTodos from "../../components/TodoComponent/DisplayTodos";
 import axios from "axios";
 import TodoDetailsModal from "../../components/TodoComponent/TodoDetailsModal";
+import { useAuth } from "../../context/AuthContext";
 
 export type Status = "PENDING" | "ON_GOING" | "COMPLETED";
 
@@ -23,7 +24,7 @@ export default function TodoNotes() {
   const [status, setStatus] = useState<Status>("PENDING");
   const [selectedTodo, setSelectedTodo] = useState<Todo | null>(null);
   const [showModal, setShowModal] = useState(false);
-
+  const { authLoading, isAuthenticated } = useAuth();
   const canAdd = title.trim().length > 0 && content.trim().length > 0;
 
   const counts = useMemo(() => {
@@ -52,9 +53,12 @@ export default function TodoNotes() {
   };
 
   useEffect(() => {
+    if (authLoading) return;
+    if (!isAuthenticated) return;
     // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchTodos();
-  }, []);
+  }, [authLoading, isAuthenticated]);
+
   console.log(todos);
   return (
     <>
