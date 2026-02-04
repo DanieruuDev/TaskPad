@@ -5,6 +5,7 @@ import DisplayTodos from "../../components/TodoComponent/DisplayTodos";
 import axios from "axios";
 import TodoDetailsModal from "../../components/TodoComponent/TodoDetailsModal";
 import { useAuth } from "../../context/AuthContext";
+import { Navigate } from "react-router";
 
 export type Status = "PENDING" | "ON_GOING" | "COMPLETED";
 
@@ -65,6 +66,14 @@ export default function TodoNotes() {
   }, [authLoading, accessToken]);
   console.log(accessToken);
   console.log(todos);
+
+  if (authLoading) {
+    return <div className="p-4 text-muted">Loading...</div>;
+  }
+  if (!accessToken) {
+    return <Navigate to="/" replace />;
+  }
+
   return (
     <>
       <div className="container">
