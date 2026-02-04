@@ -35,8 +35,7 @@ export default function TodoNotes() {
   const fetchTodos = async () => {
     const apiUrl = import.meta.env.VITE_API_URL;
     try {
-      const response = await axios.get(`${apiUrl}/api/user/todo`, {
-        headers: { Authorization: `Bearer ${accessToken}` },
+      const response = await axios.get(`${apiUrl}api/user/todo`, {
         withCredentials: true,
       });
       const data = response.data;
