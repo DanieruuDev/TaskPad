@@ -47,7 +47,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const refresh = async () => {
     try {
       const res = await axios.post(
-        `${apiUrl}refresh"`,
+        `${apiUrl}refresh`,
         {},
         {
           withCredentials: true,
@@ -77,7 +77,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const logout = async () => {
     try {
-      await axios.post(`${apiUrl}logout`);
+      await axios.post(`${apiUrl}/logout`, {}, { withCredentials: true });
     } finally {
       setAccessToken(null);
       setId(null);
