@@ -64,7 +64,7 @@ function Login({ onSwitch }: LoginProps) {
   };
 
   const loginWithGithub = () => {
-    window.location.href = `${apiUrl}auth2/authorization/github`;
+    window.location.href = `${apiUrl}oauth2/authorization/github`;
   };
 
   return (
